@@ -1,4 +1,5 @@
 
+
 export function validInput(data) {
     const { email, currency, price, direction } = data;
 
@@ -22,5 +23,3 @@ if (!email || !currency || price === undefined || !direction) {
 
     return { valid: true };
 }
-
-

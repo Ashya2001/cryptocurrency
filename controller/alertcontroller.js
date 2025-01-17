@@ -1,4 +1,5 @@
 import { getCryptoPrice } from '../service/cryptoService.js';
+
 import Alert from '../model/Alert.js';
 import { validInput } from '../utile/validator.js';
 
@@ -12,16 +13,20 @@ export async function checkAlert() {
                 (alert.direction === 'below' && price < alert.price)
             ) {
                 console.log(`Alert for ${alert.email}: ${alert.currency} is ${alert.direction} ${alert.price}`);
-           }
+           
+            }
         }
     } catch (err) {
         console.error('Error processing alerts:', err.message);
     }
 }
+
 async function createAlert(req, res) {
     try {
         const { email, currency, price, direction } = req.body;
-const validation = validInput({ email, currency, price, direction });
+
+        
+        const validation = validInput({ email, currency, price, direction });
         if (!validation.valid) {
             return res.status(400).json({ error: validation.message });
         }
@@ -36,7 +41,6 @@ const validation = validInput({ email, currency, price, direction });
     }
 }
 
-
 async function getAlerts(req, res) {
     try {
         const alerts = await Alert.find();
@@ -46,7 +50,6 @@ async function getAlerts(req, res) {
         res.status(500).json({ error: 'Failed to fetch alerts' });
     }
 }
-
 
 async function deleteAlert(req, res) {
     try {

@@ -3,14 +3,13 @@ import NodeCache from 'node-cache';
 
 const cache = new NodeCache({ stdTTL: 60 });
 
-
-const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price';
+const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd';
 console.log('cryptoService is loaded'); 
 
 export const getCryptoPrice = async (crypto) => {
     const cachedPrice = cache.get(crypto);
     if (cachedPrice) {
-        console.log(`Cache hit for ${crypto}: $${cachedPrice}`);
+        console.log(`Cache hit for ${crypto}: ${cachedPrice}`);
         return cachedPrice;
     }
 
@@ -23,7 +22,7 @@ export const getCryptoPrice = async (crypto) => {
 
         if (price) {
             cache.set(crypto, price);
-            console.log(`Cache updated for ${crypto}: $${price}`);
+            console.log(`Cache updated for ${crypto}: ${price}`);
             return price;
         } else {
             throw new Error(`Price data for ${crypto} is unavailable.`);

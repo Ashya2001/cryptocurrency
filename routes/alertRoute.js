@@ -5,7 +5,6 @@ import alertController from '../controller/alertcontroller.js';
 
 const router = express.Router();
 
-
 router.post('/', async (req, res) => {
     try {
         const { email, currency, price, direction } = req.body;
@@ -25,7 +24,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-
 router.get('/', async (req, res) => {
     try {
         const alerts = await Alert.find();
@@ -35,7 +33,6 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch alerts ' });
     }
 });
-
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -52,7 +49,6 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: 'data is not deleted' });
     }
 });
-
 
 router.post('/check', async (req, res) => {
     try {
